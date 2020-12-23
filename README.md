@@ -15,12 +15,10 @@ exchanged for soda at the cafeteria. The cafeteria has only 200 sodas, so only t
 
 ### Chaincode
 
- - Main file [movies.go](chaincode/movies.go)
- - commands to install and invoke and populate data under [commands.txt](chaincode/commands.txt)
-
+- Main file [movies.go](chaincode/movies.go)
+- commands to install and invoke and populate data under [commands.txt](chaincode/commands.txt)
 
 ### API
-
-    - Test cases under Test folder [app.e2e-spec.ts](API/test/app.e2e-spec.ts)
-    - Furthur instructions to setup SDK in the [README.md](API/README.md) file
+- Test cases under Test folder [app.e2e-spec.ts](API/test/app.e2e-spec.ts)
+- Furthur instructions to setup SDK in the [README.md](API/README.md) file
 
