@@ -157,6 +157,7 @@ func (s *SmartContract) registerTheatre(APIstub shim.ChaincodeStubInterface, arg
 		fmt.Println("Cannot unmarshal theatre Object", err)
 		return shim.Error(err.Error())
 	}	 	
+	// Create unique theatre number & save theatre
 	txnId := APIstub.GetTxID()
 	var number int
 	for _, c := range txnId { 
@@ -169,7 +170,7 @@ func (s *SmartContract) registerTheatre(APIstub shim.ChaincodeStubInterface, arg
 	if err != nil  {
 		return shim.Error(err.Error())
 	}	
-
+	// create windows for the theatre
 	for i:=1 ; i<= theatre.Windows ; i++ {
 		var window Window
 		window.WindowNo=i
@@ -280,7 +281,7 @@ func (s *SmartContract) purchaseTicket(APIstub shim.ChaincodeStubInterface, args
 	}
 	var window Window
 	json.Unmarshal(windowBytes, &window)
-	
+	// check the show for number of seats remaining
 	if show.Quantity < 0 || show.Quantity - ticket.Quantity < 0{
 		return  shim.Error("Seats Full for the requested show or Not enough seats as requested. Available:"+strconv.Itoa(show.Quantity))
 	}
@@ -326,7 +327,7 @@ func (s *SmartContract) purchaseTicket(APIstub shim.ChaincodeStubInterface, args
 }
 
 
-
+// Issue coupon for the waterbottle and popcorn also for the soda exchange
 func (s *SmartContract) issueCoupon(APIstub shim.ChaincodeStubInterface, args []string) sc.Response {
 	fmt.Println("API::issueCoupon:Start")
 
@@ -394,7 +395,7 @@ func (s *SmartContract) availExchange(APIstub shim.ChaincodeStubInterface, args 
 		fmt.Println("Exchange Availed Already")
 		return shim.Error("Exchange Availed Already")
 	}
-	
+	// check if even number for the eligible soda exchange
 	couponNo, err:=strconv.Atoi(ticket.CouponNumber)
 	if err!= nil {
 		fmt.Println("Ticket Not eligible for exchange")
